@@ -4,9 +4,10 @@ Use Technology.
 - Mockito
 - JWT
 
+![image](https://imgur.com/H5wVi6c.jpg)
 
-#Installation
-After install git, MongoDb, Postman on your computer.
+
+#After install git, MongoDb, Postman on your computer.
 - Create Folder BayTest
 - Type git init
 - git clone https://github.com/UPThawatchai/BayBankSpringBoot.git
@@ -17,19 +18,22 @@ After install git, MongoDb, Postman on your computer.
 - Open Postman
 
 Config Postman tab 1
-       1 Method post
-       2 Url : http://localhost:8080/authenticate
-       3 Add body (Username baybank only)
+ 1) Method post
+ 2) Url : http://localhost:8080/authenticate
+ 3) Add body (Username baybank only)
+       ```json
        {
           "username" : "baybank",
           "password" : "password"
        }
-       4 Send and method return token and coppy
+       ```
+ 4) Send and method return token and coppy
        
 Config Postman tab 2
-       1 Method post
-       2 Url : http://localhost:8080/register
-       3 Add body (Username baybank only)
+ 1) Method post
+ 2) Url : http://localhost:8080/register
+ 3) Add body (Username baybank only)
+       ```json
        {
             "username" : "baybank",
             "password" : "register",
@@ -40,13 +44,14 @@ Config Postman tab 2
             "lastName" : "Thamkantee",
             "salary" : 16000
         }
-        4 Tab Header Add key "Authorization" and put value from token (Tab 1.4)
-        Ex. Bearar : Bearer eyJhbGciOiJIUzUxMiJ9
-        5 Send
+       ```
+ 4) Tab Header Add key "Authorization" and put value from token (Tab 1.4)
+ - Ex. Bearar : Bearer eyJhbGciOiJIUzUxMiJ9
+ 5) Send
         
-  Config Postman tab 3     
-        1 Method Get
-        2 Url : http://localhost:8080/findAll
-        3 Tab Header Add key "Authorization" and put value from token (Tab 1.4)
-        Ex. Bearar : Bearer eyJhbGciOiJIUzUxMiJ9
-        5 Send
+Config Postman tab 3     
+ 1) Method Get
+ 2) Url : http://localhost:8080/findAll
+ 3) Tab Header Add key "Authorization" and put value from token (Tab 1.4)
+ - Ex. Bearar : Bearer eyJhbGciOiJIUzUxMiJ9
+ 5) Send
