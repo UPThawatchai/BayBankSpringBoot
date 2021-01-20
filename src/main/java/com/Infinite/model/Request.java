@@ -1,12 +1,21 @@
-package com.Infinite.request;
+package com.Infinite.model;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class Request {
+@Component
+public class Request  implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4410938582974246348L;
 	
 	private long id;
 	private String username;
@@ -17,11 +26,11 @@ public class Request {
 	private String firstName;
 	private String lastName;
 	private String memberType;
-	private Date dateofbirth;
 	private int salary;
 	private String createdBy;
 	private Date createDate;
 	private Date updateDate;
 	private String updateBy;
+	
 	
 }

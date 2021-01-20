@@ -1,4 +1,4 @@
-package com.Infinite.response;
+package com.Infinite.model;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -10,7 +10,7 @@ public class Utils {
 	
 	public static final int FIFTY_THOUNSAND = 50000;
 	public static final int THIRTY_THOUNSAND = 30000;
-	public static final int FIFTEEN_THOUNSAND = 30000;
+	public static final int FIFTEEN_THOUNSAND = 15000;
 	
 	public static final String SUCCESS = "SUCCESS";
 	public static final String INPUT_CHECK_E401 = "กรอกข้อมูลไม่ครบ";

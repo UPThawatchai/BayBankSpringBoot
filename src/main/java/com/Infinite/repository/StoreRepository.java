@@ -2,7 +2,7 @@ package com.Infinite.repository;
 
 import java.util.List;
 
-import com.Infinite.request.Request;
+import com.Infinite.model.Request;
 
 public interface StoreRepository {
 
