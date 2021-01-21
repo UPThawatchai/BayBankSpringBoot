@@ -1,5 +1,10 @@
 package com.Infinite.controller;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +12,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,33 +33,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Infinite.model.JwtRequest;
+import com.Infinite.model.JwtResponse;
+import com.Infinite.model.Request;
+import com.Infinite.model.Response;
 import com.Infinite.repository.StoreRepository;
 import com.Infinite.services.JwtUserDetailsService;
 import com.Infinite.utils.JwtTokenUtil;
 import com.Infinite.utils.Utils;
-import com.Infinite.model.Request;
-import com.Infinite.model.JwtRequest;
-import com.Infinite.model.JwtResponse;
-import com.Infinite.model.MemberType;
-import com.Infinite.model.Response;
 
 @CrossOrigin("*")
 @Service
 @RestController
 public class Controller {
 
+	@InjectMocks
 	@Autowired
 	private final StoreRepository saveRepo;
-	
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
+
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
-	
+
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
-	
+
+	@Mock
 	private Response res = null;
 
 	public Controller(StoreRepository saveRepo, AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil,
@@ -60,6 +71,26 @@ public class Controller {
 		this.jwtTokenUtil = jwtTokenUtil;
 		this.userDetailsService = userDetailsService;
 		this.res = res;
+	}
+
+	@Before
+	public void init() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	@GetMapping("/findAllTest")
+	public void getAllEmployeesTest() throws Exception {
+		
+		List<Request> req = null;
+
+		when(saveRepo.findAllUser()).thenReturn(req);
+
+		// test
+		List<Request> empList = saveRepo.findAllUser();
+
+		assertEquals(2, empList.size());
+		verify(res, times(1));
 	}
 
 	@RequestMapping({ "/hello" })
@@ -118,7 +149,7 @@ public class Controller {
 				request.setUpdateBy(re.getUpdateBy());
 				requestList.add(request);
 				response.setRequestList(requestList);
-				
+
 			}
 			response.setRespnoseCode(Utils.S101);
 			response.setResponseDesc(Utils.SUCCESS);
@@ -138,6 +169,8 @@ public class Controller {
 				req = prepareData(request);
 				response = saveToDb(req);
 				if (null != response) {
+					List<Request> requestList = saveRepo.findAllUser();
+					response.setRequestList(requestList);
 					response.setRespnoseCode(Utils.S101);
 					response.setResponseDesc(Utils.SUCCESS);
 					response.setResponseDate(new Date());
@@ -185,12 +218,13 @@ public class Controller {
 		request.setUsername(req.getUsername());
 		request.setPassword(req.getPassword());
 		request.setAddress(req.getAddress());
-		if (null != req.getPhone() && req.getPhone().trim().isEmpty()) {
+		if (null != req.getPhone() && !req.getPhone().trim().isEmpty()) {
 			String d = sd1.format(date.getTime());
 			String last4Digit = req.getPhone().substring(6, req.getPhone().length());
 			request.setId(Long.valueOf(d.concat(last4Digit)));
+			request.setPhone(req.getPhone());
 		}
-		if (null != req.getEmail() && req.getEmail().trim().isEmpty()) {
+		if (null != req.getEmail() && !req.getEmail().trim().isEmpty()) {
 			Matcher matcher = pattern.matcher(req.getEmail());
 			boolean matched = matcher.matches();
 			if (matched) {
@@ -210,9 +244,9 @@ public class Controller {
 			}
 			request.setSalary(req.getSalary());
 		}
-		request.setCreateDate(req.getCreateDate());
+		request.setCreateDate(new Date());
 		request.setCreatedBy("AutoSys");
-		request.setUpdateDate(req.getUpdateDate());
+		request.setUpdateDate(new Date());
 		request.setUpdateBy("AutoSys");
 		return request;
 	}
@@ -224,9 +258,5 @@ public class Controller {
 		}
 		return rs;
 	}
-
-//    public static void main(String args[]) {
-//    	System.out.println(Integer.parseInt("85,000"));
-//    }
 
 }

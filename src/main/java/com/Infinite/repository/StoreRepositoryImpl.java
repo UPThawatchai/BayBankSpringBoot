@@ -14,7 +14,6 @@ public class StoreRepositoryImpl implements StoreRepository {
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
-
 	
 	@Override
 	public List<Request> findAllUser() throws Exception {
@@ -27,8 +26,5 @@ public class StoreRepositoryImpl implements StoreRepository {
 		Request req = mongoTemplate.save(request);
 		return null != req ? true : false;
 	}
-
-	
-
 
 }
