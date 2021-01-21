@@ -1,4 +1,8 @@
 # BayBank Test
+
+provide JAVA Restful API for user to register and get user information after registration. Try your best to deliver 2 API services with security,
+Submit source code on GIT control with document
+
 Use Technology.
 - Java Spring Boot
 - Mockito
