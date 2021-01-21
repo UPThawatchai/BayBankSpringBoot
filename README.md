@@ -50,12 +50,12 @@ Config Postman tab 2
         }
        ```
  4) Tab Header Add key "Authorization" and put value from token (Tab 1.4)
- - Ex. Bearar : eyJhbGciOiJIUzUxMiJ9
+ - Ex. Bearer : eyJhbGciOiJIUzUxMiJ9
  5) Send
         
 Config Postman tab 3     
  1) Method Get
  2) Url : http://localhost:8080/findAll
  3) Tab Header Add key "Authorization" and put value from token (Tab 1.4)
- - Ex. Bearar : eyJhbGciOiJIUzUxMiJ9
+ - Ex. Bearer : eyJhbGciOiJIUzUxMiJ9
  5) Send
