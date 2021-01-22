@@ -41,7 +41,7 @@ Config Postman tab 2
        {
             "username" : "baybank",
             "password" : "register",
-            "address" : "109/207 Bloc20 Resident",
+            "address" : "กรุงเทพมหานคร ฯ",
             "phone" : "0988358950",
             "email" : "siseof@gmail.com",
             "firstName" : "Thawatchai",
